@@ -25,7 +25,16 @@ export default function Login() {
 
   const [loading, setLoading] = useState(false);
 
+  const handlePassVisibility = () => {
+	setValues({
+		...values,
+		showPass: !values.showPass,
+	});
+};
+
   const handleSubmit = (email, password) => {
+    setLoading(true)
+
     const loginPayload = {
       email: email,
       password: password,
@@ -93,7 +102,7 @@ export default function Login() {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
-                    // onClick={handlePassVisibility}
+                    onClick={handlePassVisibility}
                     aria-label="toggle password visibility"
                     edge="end"
                   >
@@ -109,13 +118,14 @@ export default function Login() {
           />
 
           <LoadingButton
-            onClick={handleSubmit}
+            onClick={() => handleSubmit(values.email, values.pass)}
             size="large"
             endIcon={<LoginIcon />}
             loading={loading}
             loadingPosition="end"
             variant="contained"
             fullWidth
+            disabled={!loading ? false : true}
           >
             <span>Ingresar</span>
           </LoadingButton>
