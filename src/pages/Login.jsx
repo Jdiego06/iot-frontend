@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { setAuthToken } from "../helpers/setAuthToken";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { LoadingButton } from "@mui/lab";
@@ -8,49 +7,25 @@ import {
   Grid,
   TextField,
   Box,
-  Card,
-  CardContent,
-  CardAction,
-  FormControl,
-  FormLabel,
-  Select,
-  InputLabel,
-  MenuItem,
   InputAdornment,
   IconButton,
+  Typography,
+  Divider,
 } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+
 import LoginIcon from "@mui/icons-material/Login";
-//import { bgcolor } from "@mui/system";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import logo from "../assets/logo_transparent.png";
 
-const theme = createTheme({
-  palette: {
-    colorButtom: {
-      main: "#041635",
-      contrastText: "#fff",
-    },
-  },
-});
-
-function Login() {
-  const [loading, setLoading] = useState(false);
-
+export default function Login() {
   const [values, setValues] = useState({
     email: "",
     pass: "",
     showPass: false,
   });
 
-  const handlePassVisibility = () => {
-    setValues({
-      ...values,
-      showPass: !values.showPass,
-    });
-  };
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (email, password) => {
-    //reqres registered sample user
     const loginPayload = {
       email: email,
       password: password,
@@ -66,7 +41,7 @@ function Login() {
         localStorage.setItem("token", token);
 
         //set token to axios common header
-        setAuthToken(token);
+        // setAuthToken(token);
 
         //redirect user to home page
         window.location.href = "/";
@@ -75,117 +50,105 @@ function Login() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Box my={2} mx="20%">
-          <Card>
-            <CardContent>
-              <Grid
-                container
-                direction="column"
-                spacing={2}
-                justifyContent="center"
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  lg={8}
-                  xl={12}
-                  justifyContent="center"
-                >
-                  <TextField
-                    error={false}
-                    label="Correo Electrónico"
-                    type="email"
-                    name="email"
-                    margin="dense"
-                    fullWidth
-                    variant="outlined"
-                    helperText="Campo obligatorio"
-                    placeholder="EMAIL ADDRESS"
-                  />
-                </Grid>
+    <Grid height="100%" container>
+      <Grid item xs={5} bgcolor="#E3E3E3">
+        <Box
+          height="100%"
+          padding={"0 100px 0 100px"}
+          display="flex"
+          flexDirection={"column"}
+          // alignItems="center"
+          justifyContent={"center"}
+        >
+          <Typography variant="h3">Bienvenido</Typography>
+          <Typography variant="subtitle2">
+            Por favor ingrese sus credenciales
+          </Typography>
+          <Divider></Divider>
+          <br />
 
-                <Grid
-                  item
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  lg={8}
-                  xl={12}
-                  justifyContent="center"
-                >
-                  <TextField
-                    error={false}
-                    label="Password"
-                    type={values.showPass ? "text" : "password"}
-                    //name="password"
-                    margin="dense"
-                    fullWidth
-                    variant="outlined"
-                    helperText="Campo obligatorio"
-                    placeholder="Password"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={handlePassVisibility}
-                            aria-label="toggle password visibility"
-                            edge="end"
-                          >
-                            {values.showPass ? (
-                              <VisibilityOffIcon />
-                            ) : (
-                              <VisibilityIcon />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
+          <TextField
+            error={false}
+            label="Correo Electrónico"
+            type="email"
+            name="email"
+            margin="dense"
+            variant="outlined"
+            fullWidth
+            helperText="Campo obligatorio"
+            placeholder="Correo Electrónico"
+          />
 
-                <Grid
-                  item
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  lg={8}
-                  xl={12}
-                  justifyContent="center"
-                >
-                  <Box
-                    sx={{
-                      "& > button": {
-                        my: 2,
-                      },
-                    }}
+          <TextField
+            error={false}
+            label="Password"
+            type={values.showPass ? "text" : "password"}
+            //name="password"
+            margin="dense"
+            fullWidth
+            variant="outlined"
+            helperText="Campo obligatorio"
+            placeholder="Password"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    // onClick={handlePassVisibility}
+                    aria-label="toggle password visibility"
+                    edge="end"
                   >
-                    <ThemeProvider theme={theme}>
-                      <LoadingButton
-                        //onClick={handleClick}
-                        size="large"
-                        endIcon={<LoginIcon />}
-                        loading={loading}
-                        loadingPosition="end"
-                        variant="contained"
-                        color="colorButtom"
-                        fullWidth
-                      >
-                        <span>Ingresar</span>
-                      </LoadingButton>
-                    </ThemeProvider>
-                  </Box>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+                    {values.showPass ? (
+                      <VisibilityOffIcon />
+                    ) : (
+                      <VisibilityIcon />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <LoadingButton
+            onClick={handleSubmit}
+            size="large"
+            endIcon={<LoginIcon />}
+            loading={loading}
+            loadingPosition="end"
+            variant="contained"
+            fullWidth
+          >
+            <span>Ingresar</span>
+          </LoadingButton>
         </Box>
-      </header>
-    </div>
+      </Grid>
+
+      <Grid
+        item
+        xs={7}
+        style={{
+          background: "linear-gradient(45deg, #041635 45%, #231d81)",
+        }}
+      >
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          height={"100%"}
+        >
+          <Box>
+            <img src={logo} alt="logo" loading="lazy" />
+            {/* <Typography
+              variant="h3"
+              color={"#FFF"}
+              fontWeight={"medium"}
+              textAlign={"center"}
+            >
+              My IoT Crop
+            </Typography> */}
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
-
-export default Login;
