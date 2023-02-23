@@ -3,14 +3,14 @@ import { Route, Navigate, Outlet } from "react-router-dom";
 
 const RouteGuard = ({ component: Component, ...rest }) => {
   function hasJWT() {
-    let flag = false;
+    return true;
 
     //check user has JWT token
-    localStorage.getItem("token") ? (flag = true) : (flag = false);
-    return flag;
+    // localStorage.getItem("token") ? (flag = true) : (flag = false);
+    // return flag;
   }
 
-  return hasJWT ? <Navigate to="/login" /> : <Outlet />;
+  return hasJWT ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default RouteGuard;
