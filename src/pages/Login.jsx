@@ -14,7 +14,7 @@ import {
   useTheme,
 } from "@mui/material";
 
-import logo from "../assets/logo_transparent.png";
+import { ReactComponent as Logo } from "../assets/logo.svg";
 
 import { ToastContainer, toast } from "react-toastify";
 
@@ -76,9 +76,7 @@ export default function Login() {
           theme: "colored",
         });
       })
-      .catch(
-        setLoading(false), (err) => console.log(err)
-        );
+      .catch(setLoading(false), (err) => console.log(err));
   };
 
   return (
@@ -164,7 +162,7 @@ export default function Login() {
           height={"100%"}
         >
           <Box>
-            <img src={logo} alt="logo" loading="lazy" />
+            <Logo></Logo>
           </Box>
         </Box>
       </Grid>

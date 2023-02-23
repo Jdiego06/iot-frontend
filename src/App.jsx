@@ -33,13 +33,12 @@ const theme = createTheme({
 
 function App() {
   const token = localStorage.getItem("token");
-  if (token) {
-    setAuthToken(token);
-  }
+  // if (token) {
+  //   setAuthToken(token);
+  // }
 
   return (
     <ThemeProvider theme={theme}>
-
       <CssBaseline></CssBaseline>
       <ProSidebarProvider>
         <Router>
@@ -57,7 +56,6 @@ function App() {
           </Routes>
         </Router>
       </ProSidebarProvider>
-
     </ThemeProvider>
   );
 }

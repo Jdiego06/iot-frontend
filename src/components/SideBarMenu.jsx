@@ -5,7 +5,7 @@ import MemoryIcon from "@mui/icons-material/Memory";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import { Divider, Typography, useTheme } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import logo from "../assets/logo_transparent.png";
+import { ReactComponent as Logo } from "../assets/logo.svg";
 
 export const SideBarMenu = () => {
   const theme = useTheme();
@@ -22,7 +22,7 @@ export const SideBarMenu = () => {
           },
         }}
       >
-        <img src={logo} alt="" width={"100%"} />
+        <Logo></Logo>
 
         <Divider
           sx={{
