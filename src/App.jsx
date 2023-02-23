@@ -3,15 +3,30 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import RouteGuard from "./components/RouteGuard";
-import HomePage from "./pages/HomePage";
-import { setAuthToken } from "./helpers/setAuthToken";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ProSidebarProvider } from "react-pro-sidebar";
+import Page404 from "./pages/Page404";
+import { PageLayout } from "./layouts/PageLayout";
+import { CssBaseline } from "@mui/material";
 
 const theme = createTheme({
   palette: {
     primary: {
+      light: "#36445D",
       main: "#041635",
-      contrastText: "#fff",
+      dark: "#020f25",
+      contrastText: "#FFFFFF",
+    },
+
+    secondary: {
+      light: "#83BAF9",
+      main: "#64A9F8",
+      dark: "#4676AD",
+    },
+
+    background: {
+      default: "#D3D3D3",
     },
   },
 });
@@ -24,14 +39,25 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<RouteGuard></RouteGuard>}>
-            <Route exact path="/" element={<HomePage />} />
-          </Route>
-          <Route path="/login" element={<Login></Login>} />
-        </Routes>
-      </Router>
+
+      <CssBaseline></CssBaseline>
+      <ProSidebarProvider>
+        <Router>
+          <Routes>
+            {/* Combine Layout with RouteGuard */}
+            <Route path="/" element={<RouteGuard></RouteGuard>}>
+              <Route path="/" element={<PageLayout></PageLayout>}>
+                <Route path="/users" element={<h1>Users</h1>}></Route>
+                <Route path="/devices" element={<h1>Devices</h1>}></Route>
+              </Route>
+            </Route>
+
+            <Route path="/login" element={<Login></Login>} />
+            <Route path="*" element={<Page404></Page404>} />
+          </Routes>
+        </Router>
+      </ProSidebarProvider>
+
     </ThemeProvider>
   );
 }

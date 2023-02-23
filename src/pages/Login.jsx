@@ -11,9 +11,9 @@ import {
   IconButton,
   Typography,
   Divider,
+  useTheme,
 } from "@mui/material";
 
-import LoginIcon from "@mui/icons-material/Login";
 import logo from "../assets/logo_transparent.png";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -21,6 +21,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
+  const theme = useTheme();
+
   const [values, setValues] = useState({
     email: "",
     pass: "",
@@ -81,10 +83,10 @@ export default function Login() {
 
   return (
     <Grid height="100%" container>
-      <Grid item xs={5} bgcolor="#E3E3E3">
+      <Grid item xs={7}>
         <Box
           height="100%"
-          padding={"0 100px 0 100px"}
+          padding={"0 25% 0 25%"}
           display="flex"
           flexDirection={"column"}
           // alignItems="center"
@@ -106,7 +108,6 @@ export default function Login() {
             margin="dense"
             variant="outlined"
             fullWidth
-            helperText="Campo obligatorio"
             placeholder="Correo Electrónico"
           />
 
@@ -119,7 +120,6 @@ export default function Login() {
             margin="dense"
             fullWidth
             variant="outlined"
-            helperText="Campo obligatorio"
             placeholder="Password"
             InputProps={{
               endAdornment: (
@@ -141,28 +141,21 @@ export default function Login() {
           />
 
           <LoadingButton
+            sx={{ marginTop: "20px" }}
             onClick={() => handleSubmit(values.email, values.pass)}
             size="large"
-            endIcon={<LoginIcon />}
             loading={loading}
-            loadingPosition="end"
             variant="contained"
             fullWidth
             disabled={!loading ? false : true}
           >
-            <span>Ingresar</span>
+            Ingresar
           </LoadingButton>
         </Box>
         <ToastContainer />
       </Grid>
 
-      <Grid
-        item
-        xs={7}
-        style={{
-          background: "linear-gradient(45deg, #041635 45%, #231d81)",
-        }}
-      >
+      <Grid item xs={5} bgcolor={theme.palette.primary.main}>
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -172,14 +165,6 @@ export default function Login() {
         >
           <Box>
             <img src={logo} alt="logo" loading="lazy" />
-            {/* <Typography
-              variant="h3"
-              color={"#FFF"}
-              fontWeight={"medium"}
-              textAlign={"center"}
-            >
-              My IoT Crop
-            </Typography> */}
           </Box>
         </Box>
       </Grid>
