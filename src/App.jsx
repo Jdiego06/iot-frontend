@@ -33,9 +33,11 @@ const theme = createTheme({
 
 function App() {
   const token = localStorage.getItem("token");
-  // if (token) {
-  //   setAuthToken(token);
-  // }
+
+  /*const token = localStorage.getItem("token");
+  if (token) {
+    setAuthToken(token);
+  }*/
 
   return (
     <ThemeProvider theme={theme}>
