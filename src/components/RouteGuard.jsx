@@ -10,7 +10,7 @@ const RouteGuard = ({ component: Component, ...rest }) => {
     return flag;
   }
 
-  return hasJWT ? <Navigate to="/login" /> : <Outlet />;
+  return hasJWT ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default RouteGuard;
