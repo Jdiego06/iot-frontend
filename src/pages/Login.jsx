@@ -16,6 +16,10 @@ import {
 import LoginIcon from "@mui/icons-material/Login";
 import logo from "../assets/logo_transparent.png";
 
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Login() {
   const [values, setValues] = useState({
     email: "",
@@ -26,19 +30,21 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const handlePassVisibility = () => {
-	setValues({
-		...values,
-		showPass: !values.showPass,
-	});
-};
+    setValues({
+      ...values,
+      showPass: !values.showPass,
+    });
+  };
 
   const handleSubmit = (email, password) => {
-    setLoading(true)
+    setLoading(true);
 
     const loginPayload = {
       email: email,
       password: password,
     };
+
+    console.log(loginPayload);
 
     axios
       .post("https://iot-app.herokuapp.com/api/auth/login", loginPayload)
@@ -54,8 +60,23 @@ export default function Login() {
 
         //redirect user to home page
         window.location.href = "/";
+
+        setLoading(false);
+
+        toast.success("🦄 Wow so easy!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       })
-      .catch((err) => console.log(err));
+      .catch(
+        setLoading(false), (err) => console.log(err)
+        );
   };
 
   return (
@@ -78,6 +99,7 @@ export default function Login() {
 
           <TextField
             error={false}
+            onChange={(e) => (values.email = e.target.value)}
             label="Correo Electrónico"
             type="email"
             name="email"
@@ -91,6 +113,7 @@ export default function Login() {
           <TextField
             error={false}
             label="Password"
+            onChange={(e) => (values.pass = e.target.value)}
             type={values.showPass ? "text" : "password"}
             //name="password"
             margin="dense"
@@ -107,9 +130,9 @@ export default function Login() {
                     edge="end"
                   >
                     {values.showPass ? (
-                      <VisibilityOffIcon />
-                    ) : (
                       <VisibilityIcon />
+                    ) : (
+                      <VisibilityOffIcon />
                     )}
                   </IconButton>
                 </InputAdornment>
@@ -130,6 +153,7 @@ export default function Login() {
             <span>Ingresar</span>
           </LoadingButton>
         </Box>
+        <ToastContainer />
       </Grid>
 
       <Grid
