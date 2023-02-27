@@ -53,19 +53,16 @@ export default function Login() {
       .then((response) => {
         //get token from response
         const token = response.data.token;
-
+        console.log(response.data.token);
         //set JWT token to local
         localStorage.setItem("token", token);
 
         //set token to axios common header
         // setAuthToken(token);
 
-        //redirect user to home page
-        window.location.href = "/";
-
         setLoading(false);
 
-        toast.success("🦄 Wow so easy!", {
+        toast.success("🦄 Ingreso Correcto!", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -75,6 +72,9 @@ export default function Login() {
           progress: undefined,
           theme: "colored",
         });
+
+        //redirect user to home page
+        window.location.href = "/";
       })
       .catch(setLoading(false), (err) => console.log(err));
   };

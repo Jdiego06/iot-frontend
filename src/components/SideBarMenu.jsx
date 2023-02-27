@@ -61,6 +61,7 @@ export const SideBarMenu = () => {
         <MenuItem
           icon={<LogoutIcon color="secondary" />}
           component={<Link to="/login" />}
+          onClick={<Link to="/login" />}
         >
           <Typography variant="subtitle2" color="Background">
             Salir
