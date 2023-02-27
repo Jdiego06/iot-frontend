@@ -14,7 +14,7 @@ import {
   useTheme,
 } from "@mui/material";
 
-import { ReactComponent as Logo } from "../assets/logo.svg";
+import Logo from "../assets/logo.svg";
 
 import { ToastContainer, toast } from "react-toastify";
 
@@ -161,9 +161,7 @@ export default function Login() {
           justifyContent={"center"}
           height={"100%"}
         >
-          <Box>
-            <Logo></Logo>
-          </Box>
+          <img src={Logo} alt="" width={"30%"} />
         </Box>
       </Grid>
     </Grid>
