@@ -1,17 +1,37 @@
-import { MenuItem, Menu, Sidebar } from "react-pro-sidebar";
+import { MenuItem, Menu, Sidebar, useProSidebar } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import MemoryIcon from "@mui/icons-material/Memory";
 import TimelineIcon from "@mui/icons-material/Timeline";
-import { Divider, Typography, useTheme } from "@mui/material";
+import { Divider, Grid, Typography, useTheme } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { ReactComponent as Logo } from "../assets/logo.svg";
+import Logo from "../assets/logo.svg";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export const SideBarMenu = () => {
   const theme = useTheme();
+  const { collapseSidebar, collapsed } = useProSidebar();
 
   return (
     <Sidebar backgroundColor={theme.palette.primary.main}>
+      {!collapsed ? (
+        <>
+          <Grid container justifyContent={"center"}>
+            <img src={Logo} alt="" width={"30%"} />
+          </Grid>
+        </>
+      ) : (
+        <Grid mt={"10px"} container justifyContent={"center"}>
+          <MenuIcon onClick={() => collapseSidebar()} color="secondary" />
+        </Grid>
+      )}
+
+      <Divider
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          margin: "20px 20px",
+        }}
+      ></Divider>
       <Menu
         menuItemStyles={{
           button: {
@@ -22,18 +42,9 @@ export const SideBarMenu = () => {
           },
         }}
       >
-        <Logo></Logo>
-
-        <Divider
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            margin: "0px 20px 20px 20px",
-          }}
-        ></Divider>
-
         <MenuItem
           icon={<TimelineIcon color="secondary" />}
-          component={<Link to="/users" />}
+          component={<Link to="/dashboard" />}
         >
           <Typography variant="subtitle2" color="Background">
             Dashboard
@@ -67,6 +78,10 @@ export const SideBarMenu = () => {
             Salir
           </Typography>
         </MenuItem>
+
+        <button style={{ width: "100%" }} onClick={() => collapseSidebar()}>
+          collapse
+        </button>
       </Menu>
     </Sidebar>
   );
