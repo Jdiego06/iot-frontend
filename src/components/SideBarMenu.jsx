@@ -11,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 export const SideBarMenu = () => {
   const theme = useTheme();
   const { collapseSidebar, collapsed } = useProSidebar();
+ 
 
   return (
     <Sidebar backgroundColor={theme.palette.primary.main}>
@@ -72,7 +73,6 @@ export const SideBarMenu = () => {
         <MenuItem
           icon={<LogoutIcon color="secondary" />}
           component={<Link to="/login" />}
-          onClick={<Link to="/login" />}
         >
           <Typography variant="subtitle2" color="Background">
             Salir

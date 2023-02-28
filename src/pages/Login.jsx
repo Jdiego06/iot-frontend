@@ -30,6 +30,7 @@ export default function Login() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [passwordValidation, setPasswordValidation] = useState(false);
 
   const handlePassVisibility = () => {
     setValues({
@@ -53,7 +54,7 @@ export default function Login() {
       .then((response) => {
         //get token from response
         const token = response.data.token;
-        console.log(response.data.token);
+
         //set JWT token to local
         localStorage.setItem("token", token);
 
@@ -61,22 +62,14 @@ export default function Login() {
         // setAuthToken(token);
 
         setLoading(false);
-
-        toast.success("🦄 Ingreso Correcto!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        setPasswordValidation(false);
 
         //redirect user to home page
         window.location.href = "/";
       })
-      .catch(setLoading(false), (err) => console.log(err));
+      .catch(setLoading(false), setPasswordValidation(true), (err) =>
+        console.log(err)
+      );
   };
 
   return (
@@ -110,7 +103,8 @@ export default function Login() {
           />
 
           <TextField
-            error={false}
+            error={passwordValidation}
+            helperText={passwordValidation ? "Contraseña Incorrecta" : ""}
             label="Password"
             onChange={(e) => (values.pass = e.target.value)}
             type={values.showPass ? "text" : "password"}
@@ -146,11 +140,12 @@ export default function Login() {
             variant="contained"
             fullWidth
             disabled={!loading ? false : true}
+            color={passwordValidation ? "error" : "secondary"}
           >
             Ingresar
           </LoadingButton>
         </Box>
-        <ToastContainer />
+        
       </Grid>
 
       <Grid item xs={5} bgcolor={theme.palette.primary.main}>
