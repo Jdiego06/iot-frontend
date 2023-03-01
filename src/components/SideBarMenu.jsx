@@ -11,7 +11,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 export const SideBarMenu = () => {
   const theme = useTheme();
   const { collapseSidebar, collapsed } = useProSidebar();
- 
 
   return (
     <Sidebar backgroundColor={theme.palette.primary.main}>
@@ -40,7 +39,6 @@ export const SideBarMenu = () => {
             "&:hover": {
               backgroundColor: theme.palette.primary.light,
             },
-            
           },
         }}
       >
@@ -80,13 +78,12 @@ export const SideBarMenu = () => {
           </Typography>
         </MenuItem>
 
-        <Button 
-        color="secondary"
-        variant="outlined"
-        style={{ width: "90%", marginLeft: "5%"}} 
-        onClick={() => collapseSidebar()}
-        justifyContent="center"
-        size="small"
+        <Button
+          color="secondary"
+          variant="outlined"
+          style={{ width: "90%", marginLeft: "5%" }}
+          onClick={() => collapseSidebar()}
+          size="small"
         >
           collapse
         </Button>
