@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Logo from "../assets/logo.svg";
 import { LoadingButton } from "@mui/lab";
 import {
   Grid,
@@ -14,34 +14,18 @@ import {
   useTheme,
 } from "@mui/material";
 
-import Logo from "../assets/logo.svg";
-
-import { ToastContainer, toast } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
-
 export default function Login() {
   const theme = useTheme();
-
-  const [values, setValues] = useState({
-    email: "",
-    pass: "",
-    showPass: false,
-  });
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [passwordValidation, setPasswordValidation] = useState(false);
 
-  const handlePassVisibility = () => {
-    setValues({
-      ...values,
-      showPass: !values.showPass,
-    });
-  };
-
-  const handleSubmit = (email, password) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setLoading(true);
-    setPasswordValidation(false);
+    setPasswordError(false);
 
     const loginPayload = {
       email: email,
@@ -62,90 +46,84 @@ export default function Login() {
         //set token to axios common header
         // setAuthToken(token);
 
-        setLoading(false);
-
-        setTimeout((window.location.href = "/"), 3000);
+        setTimeout(() => {
+          window.location.href = "/";
+          setLoading(false);
+        }, 300);
       })
-      .catch(
-        (err) => (
-          console.log(err), setLoading(false), setPasswordValidation(true)
-        )
-      );
+      .catch(() => {
+        setLoading(false);
+        setPasswordError(true);
+      });
   };
 
   return (
     <Grid height="100%" container>
       <Grid item xs={7}>
-        <Box
-          height="100%"
-          padding={"0 25% 0 25%"}
-          display="flex"
-          flexDirection={"column"}
-          // alignItems="center"
-          justifyContent={"center"}
-        >
-          <Typography variant="h3">Bienvenido</Typography>
-          <Typography variant="subtitle2">
-            Por favor ingrese sus credenciales
-          </Typography>
-          <Divider></Divider>
-          <br />
-
-          <TextField
-            error={false}
-            onChange={(e) => (values.email = e.target.value)}
-            label="Correo Electrónico"
-            type="email"
-            name="email"
-            margin="dense"
-            variant="outlined"
-            fullWidth
-            placeholder="Correo Electrónico"
-          />
-
-          <TextField
-            error={passwordValidation}
-            helperText={passwordValidation ? "Contraseña Incorrecta" : ""}
-            label="Password"
-            onChange={(e) => (values.pass = e.target.value)}
-            type={values.showPass ? "text" : "password"}
-            //name="password"
-            margin="dense"
-            fullWidth
-            variant="outlined"
-            placeholder="Password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={handlePassVisibility}
-                    aria-label="toggle password visibility"
-                    edge="end"
-                  >
-                    {values.showPass ? (
-                      <VisibilityIcon />
-                    ) : (
-                      <VisibilityOffIcon />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <LoadingButton
-            sx={{ marginTop: "20px" }}
-            onClick={() => handleSubmit(values.email, values.pass)}
-            size="large"
-            loading={loading}
-            variant="contained"
-            fullWidth
-            disabled={!loading ? false : true}
-            color={passwordValidation ? "error" : "secondary"}
+        <form onSubmit={handleSubmit} style={{ height: "100%" }}>
+          <Box
+            height="100%"
+            padding={"0 25% 0 25%"}
+            display="flex"
+            flexDirection={"column"}
+            justifyContent={"center"}
           >
-            Ingresar
-          </LoadingButton>
-        </Box>
+            <Typography variant="h3">Bienvenido</Typography>
+            <Typography variant="subtitle2">
+              Por favor ingrese sus credenciales
+            </Typography>
+            <Divider></Divider>
+            <br />
+
+            <TextField
+              required
+              onChange={(e) => setEmail(e.target.value)}
+              label="Correo Electrónico"
+              type="email"
+              margin="dense"
+              variant="outlined"
+              placeholder="Correo Electrónico"
+            />
+
+            <TextField
+              required
+              onChange={(e) => setPassword(e.target.value)}
+              label="Contraseña"
+              type={showPassword ? "text" : "password"}
+              margin="dense"
+              variant="outlined"
+              placeholder="Contraseña"
+              error={passwordError}
+              helperText={passwordError ? "Contraseña incorrecta" : ""}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      aria-label="toggle password visibility"
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <LoadingButton
+              type="submit"
+              sx={{ marginTop: "20px" }}
+              size="large"
+              loading={loading}
+              variant="contained"
+              fullWidth
+              disabled={loading ? true : false}
+              color="primary"
+            >
+              Ingresar
+            </LoadingButton>
+          </Box>
+        </form>
       </Grid>
 
       <Grid item xs={5} bgcolor={theme.palette.primary.main}>
