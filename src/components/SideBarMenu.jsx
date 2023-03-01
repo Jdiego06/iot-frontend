@@ -7,11 +7,12 @@ import { Button, Divider, Grid, Typography, useTheme } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logo from "../assets/logo.svg";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
 
 export const SideBarMenu = () => {
   const theme = useTheme();
   const { collapseSidebar, collapsed } = useProSidebar();
-
+  const [buttonText, setButtonText] = useState("collapse");
   return (
     <Sidebar backgroundColor={theme.palette.primary.main}>
       {!collapsed ? (
@@ -82,10 +83,14 @@ export const SideBarMenu = () => {
           color="secondary"
           variant="outlined"
           style={{ width: "90%", marginLeft: "5%" }}
-          onClick={() => collapseSidebar()}
+          onClick={() => (
+            // eslint-disable-next-line
+            collapseSidebar(),
+            collapsed ? setButtonText("collapse") : setButtonText("expand")
+          )}
           size="small"
         >
-          collapse
+          {buttonText}
         </Button>
       </Menu>
     </Sidebar>

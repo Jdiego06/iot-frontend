@@ -80,6 +80,7 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               label="Correo Electrónico"
               type="email"
+              name="email"
               margin="dense"
               variant="outlined"
               placeholder="Correo Electrónico"
@@ -103,7 +104,7 @@ export default function Login() {
                       aria-label="toggle password visibility"
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 ),
