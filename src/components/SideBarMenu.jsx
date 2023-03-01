@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import MemoryIcon from "@mui/icons-material/Memory";
 import TimelineIcon from "@mui/icons-material/Timeline";
-import { Divider, Grid, Typography, useTheme } from "@mui/material";
+import { Button, Divider, Grid, Typography, useTheme } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logo from "../assets/logo.svg";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -40,6 +40,7 @@ export const SideBarMenu = () => {
             "&:hover": {
               backgroundColor: theme.palette.primary.light,
             },
+            
           },
         }}
       >
@@ -79,9 +80,16 @@ export const SideBarMenu = () => {
           </Typography>
         </MenuItem>
 
-        <button style={{ width: "100%" }} onClick={() => collapseSidebar()}>
+        <Button 
+        color="secondary"
+        variant="outlined"
+        style={{ width: "90%", marginLeft: "5%"}} 
+        onClick={() => collapseSidebar()}
+        justifyContent="center"
+        size="small"
+        >
           collapse
-        </button>
+        </Button>
       </Menu>
     </Sidebar>
   );

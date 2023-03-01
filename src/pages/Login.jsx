@@ -41,6 +41,7 @@ export default function Login() {
 
   const handleSubmit = (email, password) => {
     setLoading(true);
+    setPasswordValidation(false);
 
     const loginPayload = {
       email: email,
@@ -62,13 +63,13 @@ export default function Login() {
         // setAuthToken(token);
 
         setLoading(false);
-        setPasswordValidation(false);
 
-        //redirect user to home page
-        window.location.href = "/";
+        setTimeout((window.location.href = "/"), 3000);
       })
-      .catch(setLoading(false), setPasswordValidation(true), (err) =>
-        console.log(err)
+      .catch(
+        (err) => (
+          console.log(err), setLoading(false), setPasswordValidation(true)
+        )
       );
   };
 
@@ -145,7 +146,6 @@ export default function Login() {
             Ingresar
           </LoadingButton>
         </Box>
-        
       </Grid>
 
       <Grid item xs={5} bgcolor={theme.palette.primary.main}>
