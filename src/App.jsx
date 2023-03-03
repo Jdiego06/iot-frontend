@@ -3,12 +3,14 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import RouteGuard from "./components/RouteGuard";
+import { setAuthToken } from "./helpers/setAuthToken";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import Page404 from "./pages/Page404";
 import { PageLayout } from "./layouts/PageLayout";
 import { CssBaseline } from "@mui/material";
+import Users from "./pages/Users";
 
 const theme = createTheme({
   palette: {
@@ -32,12 +34,12 @@ const theme = createTheme({
 });
 
 function App() {
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
 
-  /*const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   if (token) {
     setAuthToken(token);
-  }*/
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -48,7 +50,7 @@ function App() {
             {/* Combine Layout with RouteGuard */}
             <Route path="/" element={<RouteGuard></RouteGuard>}>
               <Route path="/" element={<PageLayout></PageLayout>}>
-                <Route path="/users" element={<h1>Users</h1>}></Route>
+                <Route path="/users" element={<Users/>}></Route>
                 <Route path="/devices" element={<h1>Devices</h1>}></Route>
               </Route>
             </Route>

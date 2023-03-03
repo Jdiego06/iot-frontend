@@ -39,6 +39,7 @@ export default function Login() {
       .then((response) => {
         //get token from response
         const token = response.data.token;
+        console.log("Este es el token: " + token);
 
         //set JWT token to local
         localStorage.setItem("token", token);
@@ -119,7 +120,6 @@ export default function Login() {
               variant="contained"
               fullWidth
               disabled={loading ? true : false}
-              color="primary"
             >
               Ingresar
             </LoadingButton>
