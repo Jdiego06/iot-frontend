@@ -4,7 +4,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Logo from "../assets/logo.svg";
 import { LoadingButton } from "@mui/lab";
 import { userIsAuthenticated } from "../services/AuthService";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {
   Grid,
   TextField,
@@ -18,14 +18,13 @@ import {
 
 export default function Login() {
   const theme = useTheme();
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setPasswordError(false);
@@ -35,21 +34,19 @@ export default function Login() {
       password: password,
     };
 
-    axios
-      .post("https://iot-app.herokuapp.com/api/auth/login", loginPayload)
-      .then((response) => {
-        const token = response.data.token;
-        localStorage.setItem("token", token);
+    try {
+      const response = await axios.post(
+        "https://iot-app.herokuapp.com/api/auth/login",
+        loginPayload
+      );
 
-        setTimeout(() => {
-          navigate("/");
-          setLoading(false);
-        }, 300);
-      })
-      .catch(() => {
-        setLoading(false);
-        setPasswordError(true);
-      });
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+    } catch (e) {
+      setPasswordError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (userIsAuthenticated()) {

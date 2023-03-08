@@ -17,6 +17,11 @@ export const SideBarMenu = () => {
   const navigate = useNavigate();
   const { collapseSidebar, collapsed } = useProSidebar();
 
+  const logout = () => {
+    logoutUser();
+    navigate("/login");
+  };
+
   return (
     <Sidebar backgroundColor={theme.palette.primary.main}>
       <Box display={"flex"} justifyContent={"center"} mt={1}>
@@ -72,11 +77,7 @@ export const SideBarMenu = () => {
 
         <MenuItem
           icon={<LogoutIcon color="secondary"></LogoutIcon>}
-          // component={<Link to="/login" />}
-          onClick={() => {
-            logoutUser();
-            navigate("/login");
-          }}
+          onClick={logout}
         >
           <Typography variant="subtitle2" color="Background">
             Salir
