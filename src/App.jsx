@@ -13,6 +13,12 @@ import { CssBaseline } from "@mui/material";
 import Users from "./pages/Users";
 
 const theme = createTheme({
+  typography: {
+    subtitle1: {
+      color: "#F2F2F2",
+    },
+  },
+
   palette: {
     primary: {
       light: "#36445D",
@@ -50,7 +56,8 @@ function App() {
             {/* Combine Layout with RouteGuard */}
             <Route path="/" element={<RouteGuard></RouteGuard>}>
               <Route path="/" element={<PageLayout></PageLayout>}>
-                <Route path="/users" element={<Users/>}></Route>
+                <Route path="/dashboard" element={<h1>Dashboard</h1>}></Route>
+                <Route path="/users" element={<Users />}></Route>
                 <Route path="/devices" element={<h1>Devices</h1>}></Route>
               </Route>
             </Route>

@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import MemoryIcon from "@mui/icons-material/Memory";
 import TimelineIcon from "@mui/icons-material/Timeline";
-import { Button, Divider, Grid, Typography, useTheme } from "@mui/material";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import { Divider, Typography, useTheme } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logo from "../assets/logo.svg";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Box } from "@mui/system";
+import { IconButton } from "@mui/material";
 
 export const SideBarMenu = () => {
   const theme = useTheme();
@@ -14,24 +17,18 @@ export const SideBarMenu = () => {
 
   return (
     <Sidebar backgroundColor={theme.palette.primary.main}>
-      {!collapsed ? (
-        <>
-          <Grid container justifyContent={"center"}>
-            <img src={Logo} alt="" width={"30%"} />
-          </Grid>
-        </>
-      ) : (
-        <Grid mt={"10px"} container justifyContent={"center"}>
-          <MenuIcon onClick={() => collapseSidebar()} color="secondary" />
-        </Grid>
-      )}
+      <Box display={"flex"} justifyContent={"center"} mt={1}>
+        <img
+          style={{
+            width: "50%",
+            height: "30%",
+            pointerEvents: "none",
+          }}
+          alt="logo"
+          src={Logo}
+        />
+      </Box>
 
-      <Divider
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          margin: "20px 20px",
-        }}
-      ></Divider>
       <Menu
         menuItemStyles={{
           button: {
@@ -42,6 +39,8 @@ export const SideBarMenu = () => {
           },
         }}
       >
+        <Divider sx={{ mx: 2, my: 1 }} color="lightgray"></Divider>
+
         <MenuItem
           icon={<TimelineIcon color="secondary" />}
           component={<Link to="/dashboard" />}
@@ -70,24 +69,33 @@ export const SideBarMenu = () => {
         </MenuItem>
 
         <MenuItem
-          icon={<LogoutIcon color="secondary" />}
+          icon={<LogoutIcon color="secondary"></LogoutIcon>}
           component={<Link to="/login" />}
         >
           <Typography variant="subtitle2" color="Background">
             Salir
           </Typography>
         </MenuItem>
-
-        <Button
-          color="secondary"
-          variant="outlined"
-          style={{ width: "90%", marginLeft: "5%" }}
-          onClick={() => collapseSidebar()}
-          size="small"
-        >
-          {collapsed ? "expand" : "collapse"}
-        </Button>
       </Menu>
+
+      {collapsed ? (
+        <IconButton
+          onClick={() => collapseSidebar()}
+          color="secondary"
+          sx={{ position: "absolute", right: "25%", bottom: 0 }}
+        >
+          <KeyboardDoubleArrowRightIcon></KeyboardDoubleArrowRightIcon>
+        </IconButton>
+      ) : (
+        <IconButton
+          size="small"
+          onClick={() => collapseSidebar()}
+          color="secondary"
+          sx={{ position: "absolute", right: 0, bottom: 0 }}
+        >
+          <KeyboardDoubleArrowLeftIcon fontSize="large"></KeyboardDoubleArrowLeftIcon>
+        </IconButton>
+      )}
     </Sidebar>
   );
 };
