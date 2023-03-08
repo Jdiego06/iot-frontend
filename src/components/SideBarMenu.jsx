@@ -1,5 +1,5 @@
 import { MenuItem, Menu, Sidebar, useProSidebar } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import MemoryIcon from "@mui/icons-material/Memory";
 import TimelineIcon from "@mui/icons-material/Timeline";
@@ -10,9 +10,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Logo from "../assets/logo.svg";
 import { Box } from "@mui/system";
 import { IconButton } from "@mui/material";
+import { logoutUser } from "../services/AuthService";
 
 export const SideBarMenu = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const { collapseSidebar, collapsed } = useProSidebar();
 
   return (
@@ -70,7 +72,11 @@ export const SideBarMenu = () => {
 
         <MenuItem
           icon={<LogoutIcon color="secondary"></LogoutIcon>}
-          component={<Link to="/login" />}
+          // component={<Link to="/login" />}
+          onClick={() => {
+            logoutUser();
+            navigate("/login");
+          }}
         >
           <Typography variant="subtitle2" color="Background">
             Salir

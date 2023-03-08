@@ -56,6 +56,8 @@ function App() {
             {/* Combine Layout with RouteGuard */}
             <Route path="/" element={<RouteGuard></RouteGuard>}>
               <Route path="/" element={<PageLayout></PageLayout>}>
+                <Route path="/" element={<h1>Root</h1>}></Route>
+
                 <Route path="/dashboard" element={<h1>Dashboard</h1>}></Route>
                 <Route path="/users" element={<Users />}></Route>
                 <Route path="/devices" element={<h1>Devices</h1>}></Route>

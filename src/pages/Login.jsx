@@ -3,6 +3,8 @@ import axios from "axios";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Logo from "../assets/logo.svg";
 import { LoadingButton } from "@mui/lab";
+import { userIsAuthenticated } from "../services/AuthService";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   Grid,
   TextField,
@@ -16,6 +18,7 @@ import {
 
 export default function Login() {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -32,23 +35,14 @@ export default function Login() {
       password: password,
     };
 
-    console.log(loginPayload);
-
     axios
       .post("https://iot-app.herokuapp.com/api/auth/login", loginPayload)
       .then((response) => {
-        //get token from response
         const token = response.data.token;
-        console.log("Este es el token: " + token);
-
-        //set JWT token to local
         localStorage.setItem("token", token);
 
-        //set token to axios common header
-        // setAuthToken(token);
-
         setTimeout(() => {
-          window.location.href = "/";
+          navigate("/");
           setLoading(false);
         }, 300);
       })
@@ -57,6 +51,10 @@ export default function Login() {
         setPasswordError(true);
       });
   };
+
+  if (userIsAuthenticated()) {
+    return <Navigate to="/"></Navigate>;
+  }
 
   return (
     <Grid height="100%" container>
