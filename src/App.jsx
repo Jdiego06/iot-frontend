@@ -11,6 +11,7 @@ import Page404 from "./pages/Page404";
 import { PageLayout } from "./layouts/PageLayout";
 import { CssBaseline } from "@mui/material";
 import Users from "./pages/Users";
+import Dashboard from "./pages/Dashboard";
 
 const theme = createTheme({
   typography: {
@@ -58,7 +59,10 @@ function App() {
               <Route path="/" element={<PageLayout></PageLayout>}>
                 <Route path="/" element={<h1>Root</h1>}></Route>
 
-                <Route path="/dashboard" element={<h1>Dashboard</h1>}></Route>
+                <Route
+                  path="/dashboard"
+                  element={<Dashboard></Dashboard>}
+                ></Route>
                 <Route path="/users" element={<Users />}></Route>
                 <Route path="/devices" element={<h1>Devices</h1>}></Route>
               </Route>
