@@ -5,12 +5,14 @@ export default function Dashboard() {
   const option = {
     title: {
       text: "Stacked Line",
+      left: "center",
     },
     tooltip: {
       trigger: "axis",
     },
     legend: {
       data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
+      top: "10%",
     },
     grid: {
       left: "3%",
