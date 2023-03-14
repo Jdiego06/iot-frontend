@@ -14,6 +14,8 @@ import Users from "./pages/Users";
 import Dashboard from "./pages/Dashboard";
 import Devices from "./pages/Devices";
 
+import { Navigate } from "react-router-dom";
+
 const theme = createTheme({
   typography: {
     subtitle1: {
@@ -58,7 +60,10 @@ function App() {
             {/* Combine Layout with RouteGuard */}
             <Route path="/" element={<RouteGuard></RouteGuard>}>
               <Route path="/" element={<PageLayout></PageLayout>}>
-                <Route path="/" element={<h1>Root</h1>}></Route>
+                <Route
+                  path="/"
+                  element={<Navigate to="dashboard"></Navigate>}
+                ></Route>
 
                 <Route
                   path="/dashboard"
