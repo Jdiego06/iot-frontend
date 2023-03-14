@@ -4,10 +4,13 @@ import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import IotDevice from "../assets/IoT-icon.webp";
 import KeyIcon from "@mui/icons-material/Key";
-import * as moment from "moment";
 
-import "moment/locale/es";
-moment.locale("es");
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/es";
+
+dayjs.extend(relativeTime);
+dayjs.locale("es");
 
 const devices = [
   {
@@ -54,7 +57,7 @@ function DeviceCard({ name, lastActivivty, token }) {
           <Typography fontWeight={"bold"} variant="caption" color="gray">
             Última Actividad
           </Typography>
-          <Typography>{moment(lastActivivty).fromNow()}</Typography>
+          <Typography>{dayjs(lastActivivty).fromNow()}</Typography>
 
           <Box
             display="flex"
