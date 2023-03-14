@@ -104,7 +104,7 @@ export const PageLayout = () => {
 
       <Box display={"flex"} height={`calc(100% - ${topBarHeight})`}>
         <SideBarMenu></SideBarMenu>
-        <Box overflow={"auto"} width="100%" p={2}>
+        <Box overflow={"auto"} width="100%">
           <Outlet></Outlet>
         </Box>
       </Box>

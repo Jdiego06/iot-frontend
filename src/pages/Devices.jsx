@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  Divider,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Button, Card, Divider, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
@@ -88,7 +81,7 @@ function DeviceCard({ name, lastActivivty, token }) {
 
 export default function Devices() {
   return (
-    <>
+    <Box p={2}>
       <Box
         display={"flex"}
         alignItems="center"
@@ -115,6 +108,6 @@ export default function Devices() {
           ></DeviceCard>
         ))}
       </Box>
-    </>
+    </Box>
   );
 }
