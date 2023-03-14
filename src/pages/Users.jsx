@@ -1,48 +1,78 @@
-import { Button, Grid } from "@mui/material";
-//import { Box } from "@mui/system";
-import { Fragment, useContext } from "react";
+import { Button, Divider, Modal, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { useContext, useState } from "react";
 import UserCard from "../context/UserCard";
 import { UserContext } from "../context/UserContext";
+import AddIcon from "@mui/icons-material/Add";
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 function Users() {
   const { dataUsers } = useContext(UserContext);
-  if (dataUsers.length === 0) {
-    return (
-      <h1 className="text-white text-4xl font-bold text-center">
-        No hay usuarioa aún
-      </h1>
-    );
-  }
+  const [newUser, setNewUser] = useState(false);
+  const handleOpen = () => setNewUser(true);
+  const handleClose = () => setNewUser(false);
 
   return (
-    <div>
-      <Fragment>
-        <Grid
-          container
-          sx={8}
-          spacing={3}
-          direction="row"
-          justifyContent="center"
-          paddingBottom={4}
-          alignItems="center"
+    <Box p={2}>
+      <Box
+        display={"flex"}
+        alignItems="center"
+        justifyContent={"space-between"}
+      >
+        <Typography variant="h3" fontWeight={400} color={"primary"}>
+          Usuarios
+        </Typography>
+
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          onClick={handleOpen}
         >
-          <Grid item xs={4} justifyContent="center">
-            <h1>Usuarios</h1>
-          </Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={5} >
-            <Button variant="contained" size="small">
-              Agregar usuario
-            </Button>
-          </Grid>
-        </Grid>
-        <Grid container spacing={4} justify="center" justifyContent="center" alignItems="center">
-          {dataUsers.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
-        </Grid>
-      </Fragment>
-    </div>
+          Añadir usuario
+        </Button>
+        <Modal
+          open={newUser}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={style}
+          >
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              crear usuario
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              ingresar datos del usuario
+            </Typography>
+          </Box>
+        </Modal>
+      </Box>
+
+      <Divider sx={{ my: 1 }}></Divider>
+
+      <Box display="flex" flexWrap="wrap" width={"100%"} mt={3}>
+        {dataUsers.length === 0 ? (
+          <Typography variant="h2" color={"secondary.dark"}>
+            No hay usuarios
+          </Typography>
+        ) : (
+          dataUsers.map((user) => <UserCard key={user.id} user={user} />)
+        )}
+      </Box>
+    </Box>
   );
 }
 

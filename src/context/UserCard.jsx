@@ -1,64 +1,73 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { Card, IconButton } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Card, IconButton, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import Grid from "@mui/material/Grid";
-//import Paper from "@mui/material/Paper";
-import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box } from "@mui/system";
 
 function UserCard({ user }) {
-  //const theme = useTheme();
   const { deleteUser } = useContext(UserContext);
   return (
-    <Card>
-      <Grid container xs={12} spacing={4} direction="row" alignItems="center" justifyContent="center">
-        <Grid item xs={2} alignItems="center" justifyContent="center">
+    <Card sx={{ p: 1, width: "31%", m: 1 }}>
+      <Box display={"flex"}>
+        <Box
+          sx={{
+            mr: 1,
+            pr: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
           <Avatar
             alt={user.name}
             src="https://api.dicebear.com/5.x/initials/svg?seed=Sadie"
             sx={{ width: 60, height: 60 }}
           />
-        </Grid>
-        <Grid
-          item
-          xs={8}
-          sm
-          container
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Grid
-            item
-            xs={9}
-            container
-            direction="row"
-            spacing={2}
-            alignItems="center"
+        </Box>
+        <Box width={"80%"}>
+          <Typography
+            fontWeight={"bold"}
+            fontSize="small"
+            variant="subtitle1"
+            color="black"
           >
-            <Grid item xs direction="row">
-              <Grid item>{user.name}</Grid>
-              <Grid item>{user.role}</Grid>
-              <Grid item>{user.email}</Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+            {user.name}
+          </Typography>
+          <Typography
+            fontWeight={"bold"}
+            fontSize="small"
+            variant="subtitle2"
+            color="black"
+          >
+            {user.role}
+          </Typography>
+          <Typography
+            fontWeight={"bold"}
+            fontSize="small"
+            variant="subtitle2"
+            color="black"
+          >
+            {user.email}
+          </Typography>
+        </Box>
 
-        <Grid item xs={2} justifyContent="center" alignItems="center">
-          <Grid>
-            <IconButton>
-              <AddReactionOutlinedIcon />
-            </IconButton>
-          </Grid>
+        <Box
+          display="flex"
+          flexDirection={"column"}
+          justifyContent={"space-between"}
+          alignItems="flex-end"
+        >
+          <IconButton>
+            <EditIcon />
+          </IconButton>
 
-          <Grid item xs alignItems="center">
-            <Button variant="contained" onClick={() => deleteUser(user.id)}>
-              eliminar
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
+          <IconButton variant="outlined" onClick={() => deleteUser(user.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </Box>
+      </Box>
     </Card>
   );
 }

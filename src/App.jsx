@@ -12,7 +12,7 @@ import { PageLayout } from "./layouts/PageLayout";
 import { CssBaseline } from "@mui/material";
 import Users from "./pages/Users";
 import Dashboard from "./pages/Dashboard";
-//import { Container } from "@mui/system";
+import Devices from "./pages/Devices";
 
 const theme = createTheme({
   typography: {
@@ -36,7 +36,7 @@ const theme = createTheme({
     },
 
     background: {
-      default: "#F2F2F2",
+      default: "#FBFBFB",
     },
   },
 });
@@ -64,8 +64,8 @@ function App() {
                   path="/dashboard"
                   element={<Dashboard></Dashboard>}
                 ></Route>
-                <Route path="/users" element={<aside><Users /></aside>}></Route>
-                <Route path="/devices" element={<h1>Devices</h1>}></Route>
+                <Route path="/users" element={<Users></Users>}></Route>
+                <Route path="/devices" element={<Devices></Devices>}></Route>
               </Route>
             </Route>
 
