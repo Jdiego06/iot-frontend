@@ -1,34 +1,28 @@
 import { MenuItem, Menu, Sidebar, useProSidebar } from "react-pro-sidebar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import MemoryIcon from "@mui/icons-material/Memory";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { Divider, Typography, useTheme } from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
 import Logo from "../assets/logo.svg";
 import { Box } from "@mui/system";
 import { IconButton } from "@mui/material";
-import { logoutUser } from "../services/AuthService";
 
 export const SideBarMenu = () => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const { collapseSidebar, collapsed } = useProSidebar();
 
-  const logout = () => {
-    logoutUser();
-    navigate("/login");
-  };
-
   return (
-    <Sidebar backgroundColor={theme.palette.primary.main}>
+    <Sidebar
+      backgroundColor={theme.palette.primary.main}
+      style={{ marginTop: "-64px", borderRightWidth: 0 }}
+    >
       <Box display={"flex"} justifyContent={"center"} mt={1}>
         <img
           style={{
-            width: "50%",
-            height: "30%",
+            width: "60%",
             pointerEvents: "none",
           }}
           alt="logo"
@@ -72,15 +66,6 @@ export const SideBarMenu = () => {
         >
           <Typography variant="subtitle2" color="Background">
             Usuarios
-          </Typography>
-        </MenuItem>
-
-        <MenuItem
-          icon={<LogoutIcon color="secondary"></LogoutIcon>}
-          onClick={logout}
-        >
-          <Typography variant="subtitle2" color="Background">
-            Salir
           </Typography>
         </MenuItem>
       </Menu>
