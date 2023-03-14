@@ -1,52 +1,74 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { IconButton, useTheme } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Card, IconButton, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box } from "@mui/system";
 
 function UserCard({ user }) {
-  const theme = useTheme();
   const { deleteUser } = useContext(UserContext);
   return (
-    <Paper
-      sx={{
-        p: 2,
-        margin: "auto",
-        maxWidth: 500,
-        flexGrow: 1,
-        backgroundColor: theme.palette.primary,
-      }}
-    >
-      <Grid container spacing={2}>
-        <Grid item>
+    <Card sx={{ p: 1, width: "31%", m: 1 }}>
+      <Box display={"flex"}>
+        <Box
+          sx={{
+            mr: 1,
+            pr: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
           <Avatar
             alt={user.name}
             src="https://api.dicebear.com/5.x/initials/svg?seed=Sadie"
+            sx={{ width: 60, height: 60 }}
           />
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <h1>{user.name}</h1>
-              <h1>{user.role}</h1>
-              <h1>{user.email}</h1>
-            </Grid>
-            <Grid item>
-              <Button variant="contained"
-              onClick={() => deleteUser(user.id)}>eliminar usuario</Button>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <IconButton>
-              <AddReactionOutlinedIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
+        </Box>
+        <Box width={"80%"}>
+          <Typography
+            fontWeight={"bold"}
+            fontSize="small"
+            variant="subtitle1"
+            color="black"
+          >
+            {user.name}
+          </Typography>
+          <Typography
+            fontWeight={"bold"}
+            fontSize="small"
+            variant="subtitle2"
+            color="black"
+          >
+            {user.role}
+          </Typography>
+          <Typography
+            fontWeight={"bold"}
+            fontSize="small"
+            variant="subtitle2"
+            color="black"
+          >
+            {user.email}
+          </Typography>
+        </Box>
+
+        <Box
+          display="flex"
+          flexDirection={"column"}
+          justifyContent={"space-between"}
+          alignItems="flex-end"
+        >
+          <IconButton>
+            <EditIcon />
+          </IconButton>
+
+          <IconButton variant="outlined" onClick={() => deleteUser(user.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </Box>
+      </Box>
+    </Card>
   );
 }
 
