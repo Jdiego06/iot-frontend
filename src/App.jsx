@@ -3,7 +3,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import RouteGuard from "./components/RouteGuard";
-import { setAuthToken } from "./helpers/setAuthToken";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ProSidebarProvider } from "react-pro-sidebar";
@@ -44,13 +43,6 @@ const theme = createTheme({
 });
 
 function App() {
-  //const token = localStorage.getItem("token");
-
-  const token = localStorage.getItem("token");
-  if (token) {
-    setAuthToken(token);
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline></CssBaseline>

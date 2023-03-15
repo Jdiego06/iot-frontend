@@ -14,7 +14,13 @@ import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { SideBarMenu } from "../components/SideBarMenu";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { logoutUser } from "../services/AuthService";
+import {
+  removeAuthenticatedUser,
+  getAuthenticatedUser,
+} from "../services/AuthService";
+import getAvatarUrl from "../services/AvatarService";
+
+const topBarHeight = "64px";
 
 export const TopBar = () => {
   const [anchorEl, setAnchorEl] = useState();
@@ -23,7 +29,7 @@ export const TopBar = () => {
   const navigate = useNavigate();
 
   const logOut = () => {
-    logoutUser();
+    removeAuthenticatedUser();
     navigate("/login");
   };
 
@@ -32,11 +38,11 @@ export const TopBar = () => {
     setMenuOpen(true);
   };
 
-  const topBarHeight = "64px";
+  const authenticatedUser = getAuthenticatedUser();
+
   return (
     <>
       <Box
-        // width={"100%"}
         height={topBarHeight}
         sx={{ backgroundColor: "primary.main" }}
         display="flex"
@@ -46,7 +52,7 @@ export const TopBar = () => {
         <IconButton onClick={recordButtonPosition}>
           <Avatar
             alt="JD"
-            src="https://api.dicebear.com/5.x/initials/svg?seed=Juan%20Diego&backgroundColor=00897b,00acc1,039be5,1e88e5,3949ab,43a047,5e35b1,7cb342,8e24aa,c0ca33,fb8c00,fdd835,ffb300"
+            src={getAvatarUrl(authenticatedUser.name)}
             sx={{ mr: 2 }}
           ></Avatar>
         </IconButton>
@@ -68,15 +74,15 @@ export const TopBar = () => {
             <Box>
               <Avatar
                 alt="JD"
-                src="https://api.dicebear.com/5.x/initials/svg?seed=Juan%20Diego&backgroundColor=00897b,00acc1,039be5,1e88e5,3949ab,43a047,5e35b1,7cb342,8e24aa,c0ca33,fb8c00,fdd835,ffb300"
+                src={getAvatarUrl(authenticatedUser.name)}
                 sx={{ mr: 2 }}
               ></Avatar>
             </Box>
 
             <Box>
-              <Typography variant="h6">Juan Diego</Typography>
+              <Typography variant="h6">{authenticatedUser.name}</Typography>
               <Typography variant="body2" color={"gray"}>
-                jd99@outlook.com
+                {authenticatedUser.email}
               </Typography>
             </Box>
           </Box>
@@ -96,8 +102,6 @@ export const TopBar = () => {
 };
 
 export const PageLayout = () => {
-  const topBarHeight = "64px";
-
   return (
     <Box style={{ height: "100%" }}>
       <TopBar></TopBar>

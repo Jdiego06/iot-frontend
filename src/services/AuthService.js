@@ -1,7 +1,16 @@
-export function userIsAuthenticated() {
-  return localStorage.getItem("token");
+export function getAuthenticatedUser() {
+  const user = localStorage.getItem("authUser");
+  if (user !== null) {
+    return JSON.parse(user);
+  }
+
+  return null;
 }
 
-export function logoutUser() {
-  localStorage.removeItem("token");
+export function setAuthenticatedUser(user) {
+  localStorage.setItem("authUser", JSON.stringify(user));
+}
+
+export function removeAuthenticatedUser() {
+  localStorage.removeItem("authUser");
 }

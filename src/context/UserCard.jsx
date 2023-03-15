@@ -2,55 +2,48 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Card, IconButton, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/system";
+import getAvatarUrl from "../services/AvatarService";
 
 function UserCard({ user }) {
   const { deleteUser } = useContext(UserContext);
   return (
-    <Card sx={{ p: 1, width: "31%", m: 1 }}>
+    <Card sx={{ p: 2, minWidth: "30%", m: 1 }}>
       <Box display={"flex"}>
         <Box
           sx={{
-            mr: 1,
-            pr: 1,
+            mr: 2,
+            pr: 2,
+            borderRight: 1,
+            borderColor: "gray",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
           }}
         >
           <Avatar
-            alt={user.name}
-            src="https://api.dicebear.com/5.x/initials/svg?seed=Sadie"
-            sx={{ width: 60, height: 60 }}
+            alt="avatar"
+            src={getAvatarUrl(user.name)}
+            sx={{ width: 70, height: 70, pointerEvents: "none" }}
           />
         </Box>
         <Box width={"80%"}>
-          <Typography
-            fontWeight={"bold"}
-            fontSize="small"
-            variant="subtitle1"
-            color="black"
-          >
-            {user.name}
+          <Typography fontWeight={"bold"} variant="caption" color="gray">
+            Nombre
           </Typography>
-          <Typography
-            fontWeight={"bold"}
-            fontSize="small"
-            variant="subtitle2"
-            color="black"
-          >
-            {user.role}
+          <Typography>{user.name}</Typography>
+
+          <Typography fontWeight={"bold"} variant="caption" color="gray">
+            Correo
           </Typography>
-          <Typography
-            fontWeight={"bold"}
-            fontSize="small"
-            variant="subtitle2"
-            color="black"
-          >
-            {user.email}
+          <Typography>{user.email}</Typography>
+
+          <Typography fontWeight={"bold"} variant="caption" color="gray">
+            Rol
           </Typography>
+          <Typography>{user.role}</Typography>
         </Box>
 
         <Box

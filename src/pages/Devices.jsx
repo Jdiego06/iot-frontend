@@ -28,7 +28,7 @@ const devices = [
 
 function DeviceCard({ name, lastActivivty, token }) {
   return (
-    <Card sx={{ p: 2, width: "24%", m: 1 }}>
+    <Card sx={{ p: 2, minWidth: "30%", m: 1 }}>
       <Box display={"flex"}>
         <Box
           sx={{
@@ -101,7 +101,7 @@ export default function Devices() {
 
       <Divider sx={{ my: 1 }}></Divider>
 
-      <Box display="flex" flexWrap="wrap" width={"100%"} mt={3}>
+      <Box display="flex" flexWrap="wrap" mt={3}>
         {devices.map((device) => (
           <DeviceCard
             key={device.id}

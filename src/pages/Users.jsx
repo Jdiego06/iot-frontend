@@ -5,21 +5,26 @@ import UserCard from "../context/UserCard";
 import { UserContext } from "../context/UserContext";
 import AddIcon from "@mui/icons-material/Add";
 
-
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
 function Users() {
-  const { dataUsers } = useContext(UserContext);
+  let { dataUsers } = useContext(UserContext);
+  dataUsers = [
+    ...dataUsers,
+    { name: "Pedro Pablo", email: "pedroperez@hmail.com", role: "viewer" },
+    { name: "Camila Restrepo", email: "pedroperez@hmail.com", role: "viewer" },
+  ];
+
   const [newUser, setNewUser] = useState(false);
   const handleOpen = () => setNewUser(true);
   const handleClose = () => setNewUser(false);
@@ -35,11 +40,7 @@ function Users() {
           Usuarios
         </Typography>
 
-        <Button
-          variant="outlined"
-          startIcon={<AddIcon />}
-          onClick={handleOpen}
-        >
+        <Button variant="outlined" startIcon={<AddIcon />} onClick={handleOpen}>
           Añadir usuario
         </Button>
         <Modal
@@ -48,9 +49,7 @@ function Users() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box
-            sx={style}
-          >
+          <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
               crear usuario
             </Typography>
@@ -63,7 +62,7 @@ function Users() {
 
       <Divider sx={{ my: 1 }}></Divider>
 
-      <Box display="flex" flexWrap="wrap" width={"100%"} mt={3}>
+      <Box display="flex" flexWrap="wrap" mt={3}>
         {dataUsers.length === 0 ? (
           <Typography variant="h2" color={"secondary.dark"}>
             No hay usuarios
