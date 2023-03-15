@@ -16,8 +16,6 @@ function UserCard({ user }) {
           sx={{
             mr: 2,
             pr: 2,
-            borderRight: 1,
-            borderColor: "gray",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -43,7 +41,9 @@ function UserCard({ user }) {
           <Typography fontWeight={"bold"} variant="caption" color="gray">
             Rol
           </Typography>
-          <Typography>{user.role}</Typography>
+          <Typography>
+            {user.role == "admin" ? "Administrador" : "Observador"}
+          </Typography>
         </Box>
 
         <Box

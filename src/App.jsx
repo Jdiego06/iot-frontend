@@ -2,11 +2,11 @@ import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
-import RouteGuard from "./components/RouteGuard";
+import RouteGuard from "./routes/RouteGuard";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ProSidebarProvider } from "react-pro-sidebar";
-import Page404 from "./pages/Page404";
+import NotFound from "./pages/NotFound";
 import { PageLayout } from "./layouts/PageLayout";
 import { CssBaseline } from "@mui/material";
 import Users from "./pages/Users";
@@ -67,7 +67,7 @@ function App() {
             </Route>
 
             <Route path="/login" element={<Login></Login>} />
-            <Route path="*" element={<Page404></Page404>} />
+            <Route path="*" element={<NotFound></NotFound>} />
           </Routes>
         </Router>
       </ProSidebarProvider>

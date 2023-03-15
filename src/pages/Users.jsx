@@ -23,6 +23,7 @@ function Users() {
     ...dataUsers,
     { name: "Pedro Pablo", email: "pedroperez@hmail.com", role: "viewer" },
     { name: "Camila Restrepo", email: "pedroperez@hmail.com", role: "viewer" },
+    { name: "Jorge Mario", email: "marioga@yahoo.com", role: "admin" },
   ];
 
   const [newUser, setNewUser] = useState(false);
