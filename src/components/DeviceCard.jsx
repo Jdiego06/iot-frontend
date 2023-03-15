@@ -8,7 +8,12 @@ import "dayjs/locale/es";
 dayjs.extend(relativeTime);
 dayjs.locale("es");
 
-export default function DeviceCard({ name, lastActivivty, token }) {
+export default function DeviceCard({
+  name,
+  lastActivivty,
+  token,
+  onShowToken,
+}) {
   return (
     <Card sx={{ p: 2, minWidth: "30%", m: 1 }}>
       <Box display={"flex"}>
@@ -52,7 +57,7 @@ export default function DeviceCard({ name, lastActivivty, token }) {
               <Typography>2023-02-09</Typography>
             </Box>
 
-            <IconButton color="primary" sx={{ mb: -1 }}>
+            <IconButton color="primary" sx={{ mb: -1 }} onClick={onShowToken}>
               <KeyIcon></KeyIcon>
             </IconButton>
           </Box>

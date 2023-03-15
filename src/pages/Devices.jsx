@@ -58,7 +58,9 @@ export default function Devices() {
             }}
           >
             <Box py={1} pl={2}>
-              sadijfb
+              <Typography fontWeight={"bold"} variant="h6">
+                506598c3e475
+              </Typography>
             </Box>
             <Box
               bgcolor={theme.palette.primary.main}
@@ -84,11 +86,7 @@ export default function Devices() {
           Dispositivos
         </Typography>
 
-        <Button
-          variant="outlined"
-          startIcon={<AddIcon />}
-          onClick={() => setShowTokenModal(true)}
-        >
+        <Button variant="outlined" startIcon={<AddIcon />}>
           Añadir dispositivo
         </Button>
       </Box>
@@ -98,6 +96,7 @@ export default function Devices() {
       <Box display="flex" flexWrap="wrap" mt={3}>
         {devices.map((device) => (
           <DeviceCard
+            onShowToken={() => setShowTokenModal(true)}
             key={device.id}
             name={device.name}
             token={device.token}
