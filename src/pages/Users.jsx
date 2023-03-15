@@ -50,7 +50,7 @@ function Users() {
 
       <Divider sx={{ my: 1 }}></Divider>
 
-      <Box display="flex" flexWrap="wrap" width={"100%"} mt={3}>
+      <Box display="flex" flexWrap="wrap" mt={3}>
         {dataUsers.length === 0 ? (
           <Typography variant="h2" color={"secondary.dark"}>
             No hay usuarios

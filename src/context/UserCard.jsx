@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 //import EditIcon from "@mui/icons-material/Edit";
 //import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/system";
+import getAvatarUrl from "../services/AvatarService";
 
 function UserCard({ user }) {
   // eslint-disable-next-line
@@ -13,7 +14,7 @@ function UserCard({ user }) {
     /*const { deleteUser } = useContext(UserContext);*/
   }
   return (
-    <Card sx={{ p: 1, width: "31%", m: 1 }}>
+    <Card sx={{ p: 2, minWidth: "30%", m: 1 }}>
       <Box display={"flex"}>
         <Box
           sx={{
@@ -26,9 +27,9 @@ function UserCard({ user }) {
           }}
         >
           <Avatar
-            alt={user.name}
-            src="https://api.dicebear.com/5.x/initials/svg?seed=Sadie"
-            sx={{ width: 60, height: 60 }}
+            alt="avatar"
+            src={getAvatarUrl(user.name)}
+            sx={{ width: 70, height: 70, pointerEvents: "none" }}
           />
         </Box>
         <Box
@@ -48,21 +49,13 @@ function UserCard({ user }) {
           >
             {user.name}
           </Typography>
-          <Typography
-            fontWeight={"bold"}
-            fontSize="small"
-            variant="subtitle2"
-            color="black"
-          >
-            {user.role}
+          <Typography>{user.email}</Typography>
+
+          <Typography fontWeight={"bold"} variant="caption" color="gray">
+            Rol
           </Typography>
-          <Typography
-            fontWeight={"bold"}
-            fontSize="small"
-            variant="subtitle2"
-            color="black"
-          >
-            {user.email}
+          <Typography>
+            {user.role == "admin" ? "Administrador" : "Observador"}
           </Typography>
         </Box>
 

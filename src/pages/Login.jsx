@@ -3,7 +3,10 @@ import axios from "axios";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Logo from "../assets/logo.svg";
 import { LoadingButton } from "@mui/lab";
-import { userIsAuthenticated } from "../services/AuthService";
+import {
+  getAuthenticatedUser,
+  setAuthenticatedUser,
+} from "../services/AuthService";
 import { Navigate } from "react-router-dom";
 import {
   Grid,
@@ -40,8 +43,8 @@ export default function Login() {
         loginPayload
       );
 
-      const token = response.data.token;
-      localStorage.setItem("token", token);
+      const user = response.data;
+      setAuthenticatedUser(user);
     } catch (e) {
       setPasswordError(true);
     } finally {
@@ -49,7 +52,7 @@ export default function Login() {
     }
   };
 
-  if (userIsAuthenticated()) {
+  if (getAuthenticatedUser()) {
     return <Navigate to="/"></Navigate>;
   }
 
