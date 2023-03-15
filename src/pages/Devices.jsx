@@ -1,8 +1,16 @@
-import { Button, Divider, Typography } from "@mui/material";
+import {
+  Button,
+  Divider,
+  IconButton,
+  Modal,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DeviceCard from "../components/DeviceCard";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const devices = [
   {
@@ -18,9 +26,55 @@ const devices = [
   },
 ];
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function Devices() {
+  const theme = useTheme();
+  const [showTokenModal, setShowTokenModal] = useState(false);
+
   return (
     <Box p={2}>
+      <Modal open={showTokenModal} onClose={() => setShowTokenModal(false)}>
+        <Box sx={style}>
+          <Typography variant="h5">Token del dispositivo</Typography>
+
+          <Box
+            sx={{
+              mt: 3,
+              display: "flex",
+              justifyContent: "space-between",
+              borderColor: "primary",
+              borderWidth: 2,
+              borderStyle: "solid",
+            }}
+          >
+            <Box py={1} pl={2}>
+              sadijfb
+            </Box>
+            <Box
+              bgcolor={theme.palette.primary.main}
+              width={"15%"}
+              display="flex"
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <IconButton color="secondary">
+                <ContentCopyIcon></ContentCopyIcon>
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
+      </Modal>
+
       <Box
         display={"flex"}
         alignItems="center"
@@ -30,7 +84,11 @@ export default function Devices() {
           Dispositivos
         </Typography>
 
-        <Button variant="outlined" startIcon={<AddIcon />}>
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          onClick={() => setShowTokenModal(true)}
+        >
           Añadir dispositivo
         </Button>
       </Box>
