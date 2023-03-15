@@ -1,28 +1,28 @@
 import { Button, Divider, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import UserCard from "../context/UserCard";
-import { UserContext } from "../context/UserContext";
 import AddIcon from "@mui/icons-material/Add";
+import axios from "axios";
+import { AddUserForm } from "../context/AddUserForm";
 
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
+//const { dataUsers } = useContext(UserContext);
 function Users() {
-  const { dataUsers } = useContext(UserContext);
+  const [dataUsers, setDataUsers] = useState([]);
   const [newUser, setNewUser] = useState(false);
   const handleOpen = () => setNewUser(true);
   const handleClose = () => setNewUser(false);
+
+  useEffect(() => {
+    axios
+      .get("https://iot-app.herokuapp.com/api/users")
+      .then((response) => {
+        setDataUsers(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <Box p={2}>
@@ -35,11 +35,7 @@ function Users() {
           Usuarios
         </Typography>
 
-        <Button
-          variant="outlined"
-          startIcon={<AddIcon />}
-          onClick={handleOpen}
-        >
+        <Button variant="outlined" startIcon={<AddIcon />} onClick={handleOpen}>
           Añadir usuario
         </Button>
         <Modal
@@ -48,16 +44,7 @@ function Users() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box
-            sx={style}
-          >
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              crear usuario
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              ingresar datos del usuario
-            </Typography>
-          </Box>
+          <AddUserForm></AddUserForm>
         </Modal>
       </Box>
 

@@ -1,13 +1,17 @@
-import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
-import { Card, IconButton, Typography } from "@mui/material";
+//import { useContext } from "react";
+//import { UserContext } from "../context/UserContext";
+import { Card, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+// eslint-disable-next-line
+//import EditIcon from "@mui/icons-material/Edit";
+//import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/system";
 
 function UserCard({ user }) {
-  const { deleteUser } = useContext(UserContext);
+  // eslint-disable-next-line
+  {
+    /*const { deleteUser } = useContext(UserContext);*/
+  }
   return (
     <Card sx={{ p: 1, width: "31%", m: 1 }}>
       <Box display={"flex"}>
@@ -15,6 +19,7 @@ function UserCard({ user }) {
           sx={{
             mr: 1,
             pr: 1,
+            ml: 1,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -26,7 +31,15 @@ function UserCard({ user }) {
             sx={{ width: 60, height: 60 }}
           />
         </Box>
-        <Box width={"80%"}>
+        <Box
+          width={"100%"}
+          sx={{
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            ml: 2,
+          }}
+        >
           <Typography
             fontWeight={"bold"}
             fontSize="small"
@@ -53,7 +66,7 @@ function UserCard({ user }) {
           </Typography>
         </Box>
 
-        <Box
+        {/*<Box
           display="flex"
           flexDirection={"column"}
           justifyContent={"space-between"}
@@ -66,7 +79,7 @@ function UserCard({ user }) {
           <IconButton variant="outlined" onClick={() => deleteUser(user.id)}>
             <DeleteIcon />
           </IconButton>
-        </Box>
+        </Box>*/}
       </Box>
     </Card>
   );
