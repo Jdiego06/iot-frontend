@@ -1,10 +1,10 @@
 import { Button, Divider, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import UserCard from "../context/UserCard";
+import UserCard from "../components/UserCard";
+import { AddUserForm } from "../components/AddUserForm";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
-import { AddUserForm } from "../context/AddUserForm";
 
 //const { dataUsers } = useContext(UserContext);
 function Users() {

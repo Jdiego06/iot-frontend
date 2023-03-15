@@ -41,13 +41,13 @@ function UserCard({ user }) {
             ml: 2,
           }}
         >
-          <Typography
-            fontWeight={"bold"}
-            fontSize="small"
-            variant="subtitle1"
-            color="black"
-          >
-            {user.name}
+          <Typography fontWeight={"bold"} variant="caption" color="gray">
+            Nombre
+          </Typography>
+          <Typography>{user.name}</Typography>
+
+          <Typography fontWeight={"bold"} variant="caption" color="gray">
+            Email
           </Typography>
           <Typography>{user.email}</Typography>
 
@@ -55,7 +55,7 @@ function UserCard({ user }) {
             Rol
           </Typography>
           <Typography>
-            {user.role == "admin" ? "Administrador" : "Observador"}
+            {user.role === "admin" ? "Administrador" : "Observador"}
           </Typography>
         </Box>
 
